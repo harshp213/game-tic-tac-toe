@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tic-Tac-Toe</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         START POPUP
+    ========================== -->
+
+    <div class="popup-overlay" id="startPopup">
+
+        <div class="popup">
+
+            <div class="popup-icon">
+                🎮
+            </div>
+
+            <h2>
+                Let's Play Tic-Tac-Toe!
+            </h2>
+
+            <p>
+                Best of 3 Rounds
+            </p>
+
+            <button
+                id="startGameBtn"
+                class="popup-btn">
+                Start Game
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         SPECIAL ROUND POPUP
+    ========================== -->
+
+    <div
+        class="popup-overlay hidden"
+        id="specialPopup">
+
+        <div class="popup special-popup">
+
+            <div class="special-icon">
+                🔥
+            </div>
+
+            <h2>
+                SPECIAL ROUND
+            </h2>
+
+            <div class="special-title">
+                FINAL DECIDER
+            </div>
+
+            <p>
+                Both players are tied after 3 rounds!
+            </p>
+
+            <p class="special-message">
+                This round will decide the match winner.
+            </p>
+
+            <button
+                id="startSpecialBtn"
+                class="popup-btn special-btn">
+
+                Start Special Round
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         MATCH RESULT POPUP
+    ========================== -->
+
+    <div
+        class="popup-overlay hidden"
+        id="matchPopup">
+
+        <div class="popup">
+
+            <div
+                class="popup-icon"
+                id="matchIcon">
+
+                🏆
+
+            </div>
+
+            <h2 id="matchTitle">
+                Match Over
+            </h2>
+
+            <p id="matchMessage">
+                Match Result
+            </p>
+
+
+            <div class="final-score">
+
+                <div class="final-player">
+
+                    <span>
+                        Player X
+                    </span>
+
+                    <strong id="finalXScore">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="final-player">
+
+                    <span id="finalOName">
+                        Player O
+                    </span>
+
+                    <strong id="finalOScore">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="playAgainBtn"
+                class="popup-btn">
+
+                Play Again
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         MAIN GAME
+    ========================== -->
+
+    <main class="game-container">
+
+        <h1>
+            ⭕ Tic-Tac-Toe ❌
+        </h1>
+
+        <p class="subtitle">
+            Best of 3 Rounds
+        </p>
+
+
+        <!-- GAME MODE -->
+
+        <div class="mode-container">
+
+            <button
+                id="pvpBtn"
+                class="mode-btn active">
+
+                👥 2 Players
+
+            </button>
+
+
+            <button
+                id="computerBtn"
+                class="mode-btn">
+
+                🤖 Computer
+
+            </button>
+
+        </div>
+
+
+        <!-- DIFFICULTY -->
+
+        <div
+            class="difficulty-container"
+            id="difficultySection">
+
+            <label for="difficulty">
+                Computer Difficulty:
+            </label>
+
+            <select id="difficulty">
+
+                <option value="easy">
+                    Easy
+                </option>
+
+                <option value="medium">
+                    Medium
+                </option>
+
+                <option value="hard">
+                    Hard
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- ROUND -->
+
+        <div class="round-info">
+
+            <span>
+                Round
+            </span>
+
+            <strong id="currentRound">
+                1
+            </strong>
+
+            <span>
+                / 3
+            </span>
+
+        </div>
+
+
+        <!-- PLAYERS -->
+
+        <div class="players">
+
+            <div
+                class="player-card active"
+                id="playerX">
+
+                <div class="player-symbol">
+                    X
+                </div>
+
+                <div>
+
+                    <h3>
+                        Player X
+                    </h3>
+
+                    <span>
+                        Score:
+                        <b id="xScore">
+                            0
+                        </b>
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="vs">
+                VS
+            </div>
+
+
+            <div
+                class="player-card"
+                id="playerO">
+
+                <div class="player-symbol">
+                    O
+                </div>
+
+                <div>
+
+                    <h3 id="playerOName">
+                        Player O
+                    </h3>
+
+                    <span>
+                        Score:
+                        <b id="oScore">
+                            0
+                        </b>
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div
+            class="status"
+            id="status">
+
+            Player X's Turn
+
+        </div>
+
+
+        <!-- BOARD -->
+
+        <div class="board">
+
+            <button
+                class="cell"
+                data-index="0">
+            </button>
+
+            <button
+                class="cell"
+                data-index="1">
+            </button>
+
+            <button
+                class="cell"
+                data-index="2">
+            </button>
+
+
+            <button
+                class="cell"
+                data-index="3">
+            </button>
+
+            <button
+                class="cell"
+                data-index="4">
+            </button>
+
+            <button
+                class="cell"
+                data-index="5">
+            </button>
+
+
+            <button
+                class="cell"
+                data-index="6">
+            </button>
+
+            <button
+                class="cell"
+                data-index="7">
+            </button>
+
+            <button
+                class="cell"
+                data-index="8">
+            </button>
+
+        </div>
+
+
+        <!-- SCOREBOARD -->
+
+        <div class="scoreboard">
+
+            <div>
+
+                <span>
+                    X Wins
+                </span>
+
+                <strong id="xScoreBoard">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Draws
+                </span>
+
+                <strong id="drawScore">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    O Wins
+                </span>
+
+                <strong id="oScoreBoard">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONTROLS -->
+
+        <div class="controls">
+
+            <button id="restartBtn">
+                🔄 Restart Round
+            </button>
+
+            <button id="resetScoreBtn">
+                🧹 Reset Match
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
